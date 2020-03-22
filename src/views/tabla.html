@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Registro</title>
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<body>
+    <div class="container-fluid p-3 mb-2 bg-primary text-white">
+        <div class="card-header card-title text-center shadow p-3 mb-3 bg-grey rounded">
+            <h4 class="m-0">Registro de Pacientes</h4>
+        </div>
+        <form id="barraDeBusqueda">
+            <div class="form-group ml-0 mb-2 row">
+                <input id="busquedaI" type="text" class="form-control col-md-3 p-3 bg-white rounded" placeholder="  Búsqueda por Cédula" autofocus>
+                <button class="btn btn-success ml-3">Buscar</button>
+                <input id="mostrarTodos" type="button" class="btn btn-info" value="mostrar todos" style="margin-left: 30px;">
+                <div id="countt" style="margin-left: 30px;"></div>
+            </div>
+        </form>
+        <div class="card-body shadow p-3 mb-3 bg-grey rounded">
+            <table id="tabla" class="table table-striped table-bordered table-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cédula</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Fecha</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="tablebody" class="table-primary">
+                </tbody>
+              </table>
+        </div>
+      </div>
+<style>
+    .form-control::-webkit-input-placeholder {
+        color: grey;
+        font-size: large;
+    }
+    .form-control{
+        font-size: large
+    }
+</style>
+
+<script>var $ = jQuery = require('../../node_modules/jquery/dist/jquery.min.js');</script>
+<script src="./tabla.js"></script>
+
+</body>
+</html>
