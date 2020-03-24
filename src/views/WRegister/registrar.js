@@ -29,6 +29,9 @@ const form = document.querySelector('#form');
         ipcRenderer.send('product:new', newProduct);        
         e.preventDefault();
         limpiar1();
+        const remote = require('electron').remote;
+        const r=()=>{var window = remote.getCurrentWindow();window.close();};
+        setTimeout(function(){r()},500);
     });
 
         

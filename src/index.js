@@ -84,7 +84,7 @@ module.exports.CreateWindowEdit = () => {
         },
         frame: true,
         width: 822,
-        height: 713,
+        height: 694,
         minimizable : true,
         maximizable : true,
         resizable : true,
@@ -93,6 +93,7 @@ module.exports.CreateWindowEdit = () => {
         icon: path.join(__dirname, '../assets/icons/win/icon.ico')
     });
 
+    WindowEdit.setMenu(null);
     WindowEdit.loadURL(url.format({
         pathname: path.join(__dirname, 'views/WEdit/edit.html'),
         protocol: 'file',
@@ -128,13 +129,6 @@ const templateMenu = [
         accelerator: 'Ctrl+A',
         click(){
             CreateWindowRegister();
-        }
-    },
-    {
-        label: 'EDITAR',
-        accelerator: 'Ctrl+E',
-        click(){
-            CreateWindowEdit();
         }
     },
     {
