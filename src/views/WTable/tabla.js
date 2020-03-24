@@ -97,15 +97,15 @@ pool.getConnection((err, connection) => {
         };
         document.getElementById("tablebody").innerHTML = tableBody;
         //var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');
-        borrar(results[0].cedula);
         var edit = results[0].cedula;
         const {ipcRenderer} = require('electron');
         const btn = document.getElementById('edit');
         btn.addEventListener('click', () => {
             main.CreateWindowEdit();
             const s =()=>{ipcRenderer.send('edit',edit);}
-            setTimeout(function(){s()},400);
+            setTimeout(function(){s()},800);
         });
+        borrar(results[0].cedula);
         
         
     });
@@ -120,6 +120,7 @@ limpiar2();
 
 const borrar = (c) => {
     console.log('-> ',c);
+    
     $(document).on('click', '.btn.btn-danger', (e) => {
 
         var mysql = require('mysql');
@@ -129,13 +130,14 @@ const borrar = (c) => {
         password :  null,
         database : 'registro'
         });
-
-        var cc = [c];
+        
+        //var cc = null;
+        //var cc = [c];
 
         pool.getConnection((err, connection) => { 
             var sql = 'DELETE FROM inforegistro WHERE cedula = ?';
-            console.log('x-->',cc);
-            connection.query(sql, [cc], (err, results) => {
+            console.log('x-->',c);
+            connection.query(sql, [c], (err, results) => {
             connection.release();
               if (err) throw err;
               console.log(results);

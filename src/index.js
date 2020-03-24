@@ -110,11 +110,11 @@ module.exports.CreateWindowEdit = () => {
 
 };
 
-ipcMain.on('edit', (e, edit) => {
-    console.log(edit);
-    WindowEdit.webContents.send('edit', edit);
-
-});
+    ipcMain.on('edit', (e, edit) => {
+        console.log(edit);
+        WindowEdit.webContents.send('edit', edit);
+        e.sender.send('e',edit);
+    });
     
     ipcMain.on('product:new', (e, newProduct) => {
         console.log(newProduct);
