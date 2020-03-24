@@ -1,7 +1,5 @@
-mostrarTabla();
-mostrarCedula();
 
-function mostrarTabla(){
+const mostrarTabla = () => {
 
     const {ipcRenderer} = require('electron');
 
@@ -50,63 +48,78 @@ function mostrarTabla(){
 
 };
 
-function limpiar2() {
+const limpiar2 = () => {
     document.getElementById("busquedaI").value = "";
 };
 
-function mostrarCedula(){
+const mostrarCedula = () =>{
 
     const form = document.querySelector('#barraDeBusqueda');
     form.addEventListener('submit', e => {
 
-            var mysql = require('mysql');
-            var pool = mysql.createPool({
-            host     : 'localhost',
-            user     : 'root',
-            password :  null,
-            database : 'registro'
-        });
+    const remote = require('electron').remote;
+    const main = remote.require('./index.js');
+    
 
-    const busq = document.querySelector('#busquedaI').value;
-    const busqq = [busq];
-    console.log(busq);
- 
-    pool.getConnection(function(err, connection){
-        var sql = 'SELECT * FROM inforegistro WHERE cedula = ?';
-        var values = [busqq];
-        var tableBody="";
-        connection.query(sql, [values], function(error, results) {
-        connection.release();
-          if (error) throw error;
-          console.log('usuario-> ',results);
-          console.log('cedula-> ',results[0].cedula);
-          //$('#products').text(results[0].created_at);
-            for (i = 0; i < results.length; i++) {
-            tableBody += '<tr>';
-            tableBody += '  <td>' + results[i].nombre + '</td>';
-            tableBody += '  <td>' + results[i].apellido + '</td>';
-            tableBody += '  <td>' + results[i].cedula + '</td>';        
-            tableBody += '  <td>' + results[i].direccion + '</td>';
-            tableBody += '  <td>' + results[i].telefono + '</td>';
-            tableBody += '  <td>' + results[i].created_at + '</td>';
-            tableBody += '  <td><input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;"></td>';
-            tableBody += '</tr>';
-            // <input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 10px;">
-            };
-            document.getElementById("tablebody").innerHTML = tableBody;
-            borrar(results[0].cedula);
-        });
+        var mysql = require('mysql');
+        var pool = mysql.createPool({
+        host     : 'localhost',
+        user     : 'root',
+        password :  null,
+        database : 'registro'
     });
-    e.preventDefault();
-    limpiar2();
+
+const busq = document.querySelector('#busquedaI').value;
+const busqq = [busq];
+console.log(busq);
+
+pool.getConnection((err, connection) => {
+    var sql = 'SELECT * FROM inforegistro WHERE cedula = ?';
+    var values = [busqq];
+    var tableBody="";
+    connection.query(sql, [values], (error, results) => {
+    connection.release();
+      if (error) throw error;
+      console.log('usuario-> ',results);
+      console.log('cedula-> ',results[0].cedula);
+      //$('#products').text(results[0].created_at);
+        for (i = 0; i < results.length; i++) {
+        tableBody += '<tr>';
+        tableBody += '  <td>' + results[i].nombre + '</td>';
+        tableBody += '  <td>' + results[i].apellido + '</td>';
+        tableBody += '  <td>' + results[i].cedula + '</td>';        
+        tableBody += '  <td>' + results[i].direccion + '</td>';
+        tableBody += '  <td>' + results[i].telefono + '</td>';
+        tableBody += '  <td>' + results[i].created_at + '</td>';
+        tableBody += '  <td><input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;"> <input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 10px;"></td>';
+        tableBody += '</tr>';
+        // 
+        };
+        document.getElementById("tablebody").innerHTML = tableBody;
+        //var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');
+        var edit = results[0].cedula;
+        const {ipcRenderer} = require('electron');
+        const btn = document.getElementById('edit');
+        btn.addEventListener('click', () => {
+            main.CreateWindowEdit();
+            const s =()=>{ipcRenderer.send('edit',edit);}
+            setTimeout(function(){s()},1500);
+        });
+        borrar(results[0].cedula);
+        
+    });
+});
+
+e.preventDefault();
+limpiar2();
+
     });
 
 };
 
-function borrar(c) {
+const borrar = (c) => {
     console.log('-> ',c);
-
-    $(document).on('click', '.btn.btn-danger', function (e) {
+    $(document).on('click', '.btn.btn-danger', (e) => {
 
         var mysql = require('mysql');
         var pool = mysql.createPool({
@@ -118,9 +131,9 @@ function borrar(c) {
 
         var cc = [c];
 
-        pool.getConnection(function(err, connection){ 
+        pool.getConnection((err, connection) => { 
             var sql = 'DELETE FROM inforegistro WHERE cedula = ?';
-            connection.query(sql, [cc], function(err, results) {
+            connection.query(sql, [cc], (err, results) => {
             connection.release();
               if (err) throw err;
               console.log(results);
@@ -135,10 +148,13 @@ function borrar(c) {
 
 };
 
-$(document).on('click', '.btn.btn-info', function (event) {
+$(document).on('click', '.btn.btn-info', (event) => {
     mostrarTabla();
     event.preventDefault();
 });
+
+mostrarTabla();
+mostrarCedula();
 
 
 

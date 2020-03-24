@@ -9,7 +9,8 @@ if(process.env.NODE_ENV !== 'production'){
 };
 
 let mainWindow;
-let newProductWindow;
+let WindowRegister;
+let WindowEdit;
 
 app.on('ready', () => {
 
@@ -30,12 +31,12 @@ app.on('ready', () => {
     });
 
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'views/tabla.html'),
+        pathname: path.join(__dirname, 'views/WTable/tabla.html'),
         protocol: 'file',
         slashes: true
         
     }));
-    //createNewProductWindow();
+
     mainWindow.on('closed', () => {
         app.quit();
     });
@@ -46,10 +47,10 @@ app.on('ready', () => {
     
 });
 
-function createNewProductWindow(){
+const CreateWindowRegister = ()=> {
 
 
-    newProductWindow = new BrowserWindow({
+    WindowRegister = new BrowserWindow({
 
         webPreferences: {
             nodeIntegration: true
@@ -62,48 +63,92 @@ function createNewProductWindow(){
         resizable : false,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico')
     });
-    newProductWindow.setMenu(null);
-    newProductWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'views/registrar.html'),
+    WindowRegister.setMenu(null);
+    WindowRegister.loadURL(url.format({
+        pathname: path.join(__dirname, 'views/WRegister/registrar.html'),
         protocol: 'file',
         slashes: true
     }));
 
-    newProductWindow.on('closed', () => {
-        newProductWindow = null;
+    WindowRegister.on('closed', () => {
+        WindowRegister = null;
     })
 
 };
 
+module.exports.CreateWindowEdit = () => {
+    WindowEdit = new BrowserWindow({
+    
+        webPreferences: {
+            nodeIntegration: true
+        },
+        frame: true,
+        width: 822,
+        height: 713,
+        minimizable : true,
+        maximizable : true,
+        resizable : true,
+        parent: mainWindow,
+        modal: true,
+        icon: path.join(__dirname, '../assets/icons/win/icon.ico')
+    });
+
+    WindowEdit.loadURL(url.format({
+        pathname: path.join(__dirname, 'views/WEdit/edit.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    WindowEdit.on('closed', () => {
+        WindowEdit = null;
+    });
+    
+    WindowEdit.once('ready-to-show', () => {
+        WindowEdit.show();
+    });
+
+};
+
+ipcMain.on('edit', (e, edit) => {
+    console.log(edit);
+    WindowEdit.webContents.send('edit', edit);
+
+});
+    
     ipcMain.on('product:new', (e, newProduct) => {
         console.log(newProduct);
         mainWindow.webContents.send('product:new', newProduct);
-        newProductWindow.webContents.send('product:new', newProduct);
-        //win2.webContents.send('product:new', newProduct);
-        //newProductWindow.close();
+        WindowRegister.webContents.send('product:new', newProduct);
     });
-
+    
 const templateMenu = [
     
     {
-        label: 'Añadir',
+        label: 'AÑADIR',
         accelerator: 'Ctrl+A',
         click(){
-            createNewProductWindow();
+            CreateWindowRegister();
         }
     },
     {
-        role: 'reload'
+        label: 'EDITAR',
+        accelerator: 'Ctrl+E',
+        click(){
+            CreateWindowEdit();
+        }
     },
     {
-        label: 'Salir',
-        accelerator: process.platform == 'darwin' ? 'command+Q' : 'Ctrl+S',
+        role: 'RELOAD'
+    },
+    {
+        label: 'SALIR',
+        accelerator: 'Ctrl+S',
         click(){
             app.quit();
         }
     }
 ];
-/*
+
 if(process.env.NODE_ENV !== 'production'){
     templateMenu.push({
         label: 'Devtools',
@@ -118,5 +163,4 @@ if(process.env.NODE_ENV !== 'production'){
         ]
     })
 
-}
-*/
+};

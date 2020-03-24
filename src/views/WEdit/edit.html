@@ -3,11 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editando...</title>
+    <link rel="stylesheet" href="../../bootstrap.css">
 </head>
-<body>
-    hola
+<!---->
+<body style="overflow-y: hidden;">
+    <div class="container-fluid p-3 mb-2 bg-warning text-grey">
+        <div class="card" >
+            <div class="card-header shadow p-3 mb-3 text-center">
+                <h2 class="card-title">Editando</h2>
+            </div>
+        <div class="card-body row">
+            <div class="card">
+                <form class="p-4" id="form">
+                    <div class="form-group">
+                        <input type="text" id="name" class="form-control" placeholder="Nombre" autofocus >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lastname" class="form-control" placeholder="Apellido">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="identificationcard" class="form-control" placeholder="Cédula">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="adreess" class="form-control" placeholder="Dirección">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="phoneline" class="form-control" placeholder="Teléfono">
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-warning btn-block">ACTUALIZAR</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card" style="margin-left: 20px;">
+                <div class="card-header shadow p-3 mb-3 text-center">
+                    <h3 class="card-title">NOTAS</h3>
+                </div>
+                <div class="card-body">
+                    <textarea class="letra" name="" id="notas" cols="3" rows="10" style="width: 450px;height: 350px;margin: 0px;"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <style>
+        .form-control::-webkit-input-placeholder {
+         color: grey;
+         font-size: large;
+        }
+        .form-control{
+            font-size: large
+        }
+        .letra{
+            font-size: large
+        }
+    </style>
     <script>var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');</script>
-    <script src="edit.js"></script>
+    <script src="./edit.js"></script>
+
 </body>
 </html>
