@@ -34,7 +34,7 @@ ipcRenderer.on('edit', (e,edit)=>{
                 $("#identificationcard").val(results[i].cedula);
                 $("#adreess").val(results[i].direccion);
                 $("#phoneline").val(results[i].telefono);
-                $("#notas").val('{  '+moment().format('LLLL')+'  }'+results[i].notas);   
+                $("#notas").val(moment().format('LLLL')+'-->'+'\n'+'\\\n'+results[i].notas);   
             };
         });
     });

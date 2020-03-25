@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historial Médico</title>
-    <link rel="stylesheet" href="../../bootstrap.css">
+    <link rel="stylesheet" href="../../bootstrap.min.css">
 </head>
 <!---->
 <body style="overflow-y: hidden;">
@@ -41,7 +41,7 @@
                     <h3 class="card-title">NOTAS</h3>
                 </div>
                 <div class="card-body">
-                    <textarea class="letra" name="" id="notas" cols="3" rows="10" style="width: 450px;height: 350px;margin: 0px;"></textarea>
+                    <textarea name="" id="notas" cols="1" rows="10" style="width: 470px;height: 350px;margin: 0px;font-size:x-large;"></textarea>
                 </div>
             </div>
         </div>
@@ -51,13 +51,11 @@
     <style>
         .form-control::-webkit-input-placeholder {
          color: grey;
-         font-size: large;
+         font-size: x-large;
         }
         .form-control{
-            font-size: large
-        }
-        .letra{
-            font-size: large
+            color: black;
+            font-size: x-large
         }
     </style>
     <script>var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');</script>
