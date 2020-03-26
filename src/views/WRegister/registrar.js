@@ -1,3 +1,15 @@
+const customTitlebar = require('custom-electron-titlebar');
+ 
+let MyTitleBar = new customTitlebar.Titlebar({
+    backgroundColor: customTitlebar.Color.fromHex('#21263E'),
+    overflow: "hidden",
+    shadow: true,
+    maximizable: false,
+    icon: '../../../assets/icons/win/icon.ico'
+});
+
+MyTitleBar.updateTitle('');
+
 function limpiar1() {
     document.getElementById("name").value = "";
     document.getElementById("lastname").value = "";

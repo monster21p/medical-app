@@ -1,14 +1,7 @@
 
-    module.exports = function(newProduct){
+module.exports = function(newProduct){
 
-            // MYSQL
-    var mysql = require('mysql');
-    var pool = mysql.createPool({
-    host     : 'localhost',
-    user     : 'root',
-    password :  null,
-    database : 'registro'
-    });
+    const pool = require('../../sqlserver');
 
     pool.getConnection(function(err, connection) {  
         console.log("Connected!");  
@@ -19,10 +12,10 @@
         connection.release(); 
         if (err) throw err;  
         console.log("Agregado: " + results.affectedRows);
+        //alert("Agregado");
         });  
     }); 
-
-    };
+};
 
 
 

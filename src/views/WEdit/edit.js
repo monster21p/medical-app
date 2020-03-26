@@ -1,3 +1,15 @@
+const customTitlebar = require('custom-electron-titlebar');
+ 
+let MyTitleBar = new customTitlebar.Titlebar({
+    backgroundColor: customTitlebar.Color.fromHex('#21263E'),
+    overflow: "hidden",
+    shadow: true,
+    maximizable: false,
+    icon: '../../../assets/icons/win/icon.ico'
+});
+
+MyTitleBar.updateTitle('');
+
 const {ipcRenderer} = require ('electron');
 var moment = require('moment');
 moment.locale('es');
@@ -5,25 +17,16 @@ console.log('bienvenido');
 
 
 ipcRenderer.on('edit', (e,edit)=>{
-    console.log(edit);
-    var ce = edit;
 
+    console.log('editando-->',edit);
 
-    var mysql = require('mysql');
-    var pool = mysql.createPool({
-    host     : 'localhost',
-    user     : 'root',
-    password :  null,
-    database : 'registro'
-    });
+    const pool = require('../../sqlserver');
 
-    const busq = edit;
-    const busqq = [busq];
-    console.log(busq);
+    const cedula = [edit];
 
     pool.getConnection((err, connection) => {
         var sql = 'SELECT * FROM inforegistro WHERE cedula = ?';
-        var values = [busqq];
+        var values = [cedula];
         
         connection.query(sql, [values], (error, results) => {
             connection.release();
@@ -34,7 +37,7 @@ ipcRenderer.on('edit', (e,edit)=>{
                 $("#identificationcard").val(results[i].cedula);
                 $("#adreess").val(results[i].direccion);
                 $("#phoneline").val(results[i].telefono);
-                $("#notas").val(moment().format('LLLL')+'-->'+'\n'+'\\\n'+results[i].notas);   
+                $("#notas").val(moment().format('LLLL')+'-->'+'\n'+'\\\n'+'\n'+results[i].notas);   
             };
         });
     });
@@ -62,7 +65,7 @@ ipcRenderer.on('edit', (e,edit)=>{
             console.log("Connected!");  
             var sql = 'UPDATE inforegistro SET nombre=?, apellido=?, cedula=?, direccion=?, telefono=?, notas=? WHERE cedula=?'; 
             console.log(newProduct);
-            connection.query(sql, [nameT,lastnameT,identificationT,adreessT,phonelineT,notasT,ce], function (err, results) { 
+            connection.query(sql, [nameT,lastnameT,identificationT,adreessT,phonelineT,notasT,edit], function (err, results) { 
             connection.release(); 
             if (err) throw err;  
             console.log("Agregado: " + results.affectedRows);
@@ -72,7 +75,6 @@ ipcRenderer.on('edit', (e,edit)=>{
         const x=()=>{var window = remote.getCurrentWindow();window.close();};
         setTimeout(function(){x()},600);       
         e.preventDefault();
-        //limpiar1();
     });
 });
 

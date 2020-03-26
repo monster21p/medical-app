@@ -14,6 +14,71 @@ let WindowEdit;
 
 app.on('ready', () => {
 
+    CreateStartWindow();
+    setTimeout(function(){CreateWindowTable()},2500);
+    
+});
+
+const CreateStartWindow = ()=> {
+
+
+    StartWindow = new BrowserWindow({
+
+        webPreferences: {
+            nodeIntegration: true
+        },
+        frame: false,
+        width: 500,
+        height: 150,
+        resizable : false
+    });
+    StartWindow.setMenu(null);
+    StartWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'start.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    StartWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
+};
+
+const CreateWindowRegister = ()=> {
+
+
+    WindowRegister = new BrowserWindow({
+
+        webPreferences: {
+            nodeIntegration: true
+        },
+        frame: false,
+        width: 500,
+        height: 585,
+        minimizable : true,
+        maximizable : true,
+        resizable : false,
+        icon: path.join(__dirname, '../assets/icons/win/icon.ico')
+    });
+    WindowRegister.setMenu(null);
+    WindowRegister.loadURL(url.format({
+        pathname: path.join(__dirname, 'views/WRegister/registrar.html'),
+        protocol: 'file',
+        slashes: true
+    }));
+
+    WindowRegister.on('closed', () => {
+        WindowRegister = null;
+    });
+
+    WindowRegister.once('ready-to-show', () => {
+        WindowRegister.show();
+    });
+
+};
+
+const CreateWindowTable = () => {
+
     const mainMenu = Menu.buildFromTemplate(templateMenu);
     Menu.setApplicationMenu(mainMenu);
 
@@ -25,7 +90,8 @@ app.on('ready', () => {
         height:768,
         resizable : false,
         show: false,
-        icon: path.join(__dirname, '../assets/icons/win/icon.ico')
+        icon: path.join(__dirname, '../assets/icons/win/icon.ico'),
+        frame: false
         
 
     });
@@ -44,37 +110,7 @@ app.on('ready', () => {
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
     });
-    
-});
-
-const CreateWindowRegister = ()=> {
-
-
-    WindowRegister = new BrowserWindow({
-
-        webPreferences: {
-            nodeIntegration: true
-        },
-        frame: true,
-        width: 500,
-        height: 605,
-        minimizable : true,
-        maximizable : true,
-        resizable : false,
-        icon: path.join(__dirname, '../assets/icons/win/icon.ico')
-    });
-    WindowRegister.setMenu(null);
-    WindowRegister.loadURL(url.format({
-        pathname: path.join(__dirname, 'views/WRegister/registrar.html'),
-        protocol: 'file',
-        slashes: true
-    }));
-
-    WindowRegister.on('closed', () => {
-        WindowRegister = null;
-    })
-
-};
+}; 
 
 module.exports.CreateWindowEdit = () => {
     WindowEdit = new BrowserWindow({
@@ -82,12 +118,12 @@ module.exports.CreateWindowEdit = () => {
         webPreferences: {
             nodeIntegration: true
         },
-        frame: true,
+        frame: false,
         width: 925,
-        height: 718,
+        height: 677,
         minimizable : true,
-        maximizable : true,
-        resizable : true,
+        maximizable : false,
+        resizable : false,
         parent: mainWindow,
         modal: true,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico')
@@ -125,24 +161,14 @@ module.exports.CreateWindowEdit = () => {
 const templateMenu = [
     
     {
-        label: 'AÑADIR',
+        label: 'Añadir',
         accelerator: 'Ctrl+A',
         click(){
             CreateWindowRegister();
         }
-    },
-    {
-        role: 'RELOAD'
-    },
-    {
-        label: 'SALIR',
-        accelerator: 'Ctrl+S',
-        click(){
-            app.quit();
-        }
     }
 ];
-
+/*
 if(process.env.NODE_ENV !== 'production'){
     templateMenu.push({
         label: 'Devtools',
@@ -158,3 +184,4 @@ if(process.env.NODE_ENV !== 'production'){
     })
 
 };
+*/
