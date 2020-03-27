@@ -2,6 +2,7 @@
 module.exports = function(newProduct){
 
     const pool = require('../../sqlserver');
+    const {ipcRenderer} = require('electron');
 
     pool.getConnection(function(err, connection) {  
         console.log("Connected!");  
@@ -12,7 +13,7 @@ module.exports = function(newProduct){
         connection.release(); 
         if (err) throw err;  
         console.log("Agregado: " + results.affectedRows);
-        //alert("Agregado");
+        ipcRenderer.send('product:new', newProduct); 
         });  
     }); 
 };

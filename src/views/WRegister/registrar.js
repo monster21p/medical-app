@@ -18,7 +18,7 @@ function limpiar1() {
     document.getElementById("phoneline").value = "";
 };
 
-const {ipcRenderer} = require('electron');
+//const {ipcRenderer} = require('electron');
 const form = document.querySelector('#form');
 
     form.addEventListener('submit', e => {
@@ -38,7 +38,7 @@ const form = document.querySelector('#form');
 
         const registrar = require('./registrarDB');
         registrar(newProduct);
-        ipcRenderer.send('product:new', newProduct);        
+        //ipcRenderer.send('product:new', newProduct);        
         e.preventDefault();
         limpiar1();
         const remote = require('electron').remote;

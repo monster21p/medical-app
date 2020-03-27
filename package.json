@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "alertifyjs": "^1.13.1",
     "custom-electron-titlebar": "^3.2.2-hotfix62",
     "electron": "^8.1.1",
     "electron-packager": "^14.2.1",

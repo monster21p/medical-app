@@ -9,8 +9,17 @@ let MyTitleBar = new customTitlebar.Titlebar({
 
 MyTitleBar.updateTitle('REGISTRO');
 
-const mt = require('./mostrarTabla');
-mt.mostrarTabla();
+const mostrarTabla = require('./mostrarTabla');
+mostrarTabla();
+
+const {ipcRenderer} = require('electron');
+ipcRenderer.on('product:new', (e , newProduct) => {
+    console.log('agregado--> ',newProduct);
+    var name = newProduct[0];
+    console.log('nombre-->',name);
+    alertify.set('notifier','position', 'top-left');
+    alertify.success('Agregado : ' + name);
+});
 
 const limpiar2 = () => {
     document.getElementById("busquedaI").value = "";
@@ -20,12 +29,13 @@ const mostrarCedula = (mc) =>{
 
     const remote = require('electron').remote;
     const main = remote.require('./index.js');
+    const borrar = require('./eliminar');
     
     const pool = require('../../sqlserver');
     console.log(mc);
     const busqq = [mc];
 
-    pool.getConnection((err, connection) => {
+    pool.getConnection((err, connection, connection2) => {
         var sql = 'SELECT * FROM inforegistro WHERE cedula = ?';
         var values = [busqq];
         var tableBody="";
@@ -42,49 +52,35 @@ const mostrarCedula = (mc) =>{
                 tableBody += '  <td>' + results[i].direccion + '</td>';
                 tableBody += '  <td>' + results[i].telefono + '</td>';
                 tableBody += '  <td>' + results[i].created_at + '</td>';
-                tableBody += '  <td><input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;"> <input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 10px;"></td>';
+                tableBody += '  <td><input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 10px;"><input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;"></td>';
                 tableBody += '</tr>';
+                //<input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;">
             };
             document.getElementById("tablebody").innerHTML = tableBody;
             var edit = results[0].cedula;
             const {ipcRenderer} = require('electron');
-            const btn = document.getElementById('edit');
-            btn.addEventListener('click', () => {
+            const btn1 = document.getElementById('edit');
+            const btn2 = document.getElementById('delete');
+            btn2.addEventListener('click', ()=>{
+                alertify.confirm('Eliminar: '+edit, 'Esta Seguro?', 
+                    function(){borrar(edit),alertify.success('Eliminación  Exitosa') }, 
+                    function(){alertify.error('Cancelado')});
+            });
+            btn1.addEventListener('click', () => {
                 main.CreateWindowEdit();
                 const s =()=>{ipcRenderer.send('edit',edit);}
                 setTimeout(function(){s()},800);
             });
-            borrar(results[0].cedula);
+            
         });
+
     });
     limpiar2();
-};
-
-const borrar = (c) => {
-    
-    $(document).on('click', '.btn.btn-danger', (e) => {
-
-        const pool = require('../../sqlserver');
-
-        pool.getConnection((err, connection) => { 
-            var sql = 'DELETE FROM inforegistro WHERE cedula = ?';
-            console.log('x-->',c);
-            connection.query(sql, [c], (err, results) => {
-            connection.release();
-              if (err) throw err;
-              console.log(results);
-              console.log('usuario eliminado');
-            });
-        });
-        e.preventDefault();
-        $(this).closest('tr').remove();
-        main.mostrarTabla();
-    });
-
+    //borrar(mc);
 };
 
 $(document).on('click', '.btn.btn-info', (e) => {
-    mt.mostrarTabla();
+    mostrarTabla();
     e.preventDefault();
 });
 

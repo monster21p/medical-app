@@ -1,9 +1,4 @@
-module.exports.mostrarTabla = () => {
-
-    const {ipcRenderer} = require('electron');
-        ipcRenderer.on('product:new', (e , newProduct) => {
-        console.log('agregado--> ',newProduct);
-    });
+const mostrarTabla = () => {
 
     const pool = require('../../sqlserver');
 
@@ -21,7 +16,6 @@ module.exports.mostrarTabla = () => {
             connection.query(sql, function(err, results) {
               if (err) throw err;
               console.log(results);
-              //$('#products').text(results[0].created_at);
                 for (i = 0; i < results.length; i++) {
                 tableBody += '<tr>';
                 tableBody += '  <td>' + results[i].nombre + '</td>';
@@ -30,12 +24,11 @@ module.exports.mostrarTabla = () => {
                 tableBody += '  <td>' + results[i].direccion + '</td>';
                 tableBody += '  <td>' + results[i].telefono + '</td>';
                 tableBody += '  <td>' + results[i].created_at +'</td>';
-                //tableBody += '  <td> <input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;"> <input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 10px;"></td>';
                 tableBody += '</tr>';
                 }
                 document.getElementById("tablebody").innerHTML = tableBody;
-                //borrar(results[0].cedula);
             }); 
         });
-
 };
+
+module.exports = mostrarTabla;

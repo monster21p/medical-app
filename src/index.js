@@ -14,8 +14,9 @@ let WindowEdit;
 
 app.on('ready', () => {
 
+    
     CreateStartWindow();
-    setTimeout(function(){CreateWindowTable()},2500);
+    setTimeout(function(){CreateWindowTable()},4000);
     
 });
 
@@ -30,7 +31,8 @@ const CreateStartWindow = ()=> {
         frame: false,
         width: 500,
         height: 150,
-        resizable : false
+        resizable : false,
+        show: false
     });
     StartWindow.setMenu(null);
     StartWindow.loadURL(url.format({
@@ -40,7 +42,7 @@ const CreateStartWindow = ()=> {
     }));
 
     StartWindow.once('ready-to-show', () => {
-        mainWindow.show();
+        StartWindow.show();
     });
 };
 
@@ -58,6 +60,7 @@ const CreateWindowRegister = ()=> {
         minimizable : true,
         maximizable : true,
         resizable : false,
+        show: false,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico')
     });
     WindowRegister.setMenu(null);
@@ -92,8 +95,6 @@ const CreateWindowTable = () => {
         show: false,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico'),
         frame: false
-        
-
     });
 
     mainWindow.loadURL(url.format({
@@ -126,6 +127,7 @@ module.exports.CreateWindowEdit = () => {
         resizable : false,
         parent: mainWindow,
         modal: true,
+        show: false,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico')
     });
 
@@ -168,7 +170,7 @@ const templateMenu = [
         }
     }
 ];
-/*
+
 if(process.env.NODE_ENV !== 'production'){
     templateMenu.push({
         label: 'Devtools',
@@ -184,4 +186,4 @@ if(process.env.NODE_ENV !== 'production'){
     })
 
 };
-*/
+
