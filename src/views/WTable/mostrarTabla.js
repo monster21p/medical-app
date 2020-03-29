@@ -23,7 +23,7 @@ const mostrarTabla = () => {
                 tableBody += '  <td>' + results[i].cedula + '</td>';        
                 tableBody += '  <td>' + results[i].direccion + '</td>';
                 tableBody += '  <td>' + results[i].telefono + '</td>';
-                tableBody += '  <td>' + results[i].created_at +'</td>';
+                tableBody += '  <td>' + results[i].fecha +'</td>';
                 tableBody += '</tr>';
                 }
                 document.getElementById("tablebody").innerHTML = tableBody;

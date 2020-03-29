@@ -27,18 +27,22 @@ const form = document.querySelector('#form');
         const identificationT = document.querySelector('#identificationcard').value;
         const adreessT = document.querySelector('#adreess').value;
         const phonelineT = document.querySelector('#phoneline').value;
+        var moment = require('moment');
+        moment.locale('es-us');
+        const fechaT = moment().format('LLLL')
 
         const newProduct = [
             nameT,
             lastnameT,
             identificationT,
             adreessT,
-            phonelineT 
+            phonelineT,
+            fechaT 
         ];  
+        
 
         const registrar = require('./registrarDB');
-        registrar(newProduct);
-        //ipcRenderer.send('product:new', newProduct);        
+        registrar(newProduct);      
         e.preventDefault();
         limpiar1();
         const remote = require('electron').remote;

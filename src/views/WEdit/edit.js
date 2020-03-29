@@ -1,5 +1,10 @@
+
+//modulos importados
 const customTitlebar = require('custom-electron-titlebar');
- 
+const {ipcRenderer} = require ('electron');
+const moment = require('moment');
+const remote = require('electron').remote;
+
 let MyTitleBar = new customTitlebar.Titlebar({
     backgroundColor: customTitlebar.Color.fromHex('#21263E'),
     overflow: "hidden",
@@ -10,25 +15,14 @@ let MyTitleBar = new customTitlebar.Titlebar({
 
 MyTitleBar.updateTitle('');
 
-const {ipcRenderer} = require ('electron');
-var moment = require('moment');
-moment.locale('es');
-console.log('bienvenido');
-
+moment.locale('es-us');
 
 ipcRenderer.on('edit', (e,edit)=>{
-
     console.log('editando-->',edit);
-
     const pool = require('../../sqlserver');
-
-    const cedula = [edit];
-
     pool.getConnection((err, connection) => {
         var sql = 'SELECT * FROM inforegistro WHERE cedula = ?';
-        var values = [cedula];
-        
-        connection.query(sql, [values], (error, results) => {
+        connection.query(sql, [edit], (error, results) => {
             connection.release();
             if (error) throw error;
             for (i = 0; i < results.length; i++) {
@@ -51,6 +45,7 @@ ipcRenderer.on('edit', (e,edit)=>{
         const adreessT = document.querySelector('#adreess').value;
         const phonelineT = document.querySelector('#phoneline').value;
         const notasT = document.querySelector('#notas').value;
+        const fechaT = moment().format('LLLL');
 
         const newProduct = [
             nameT,
@@ -58,20 +53,22 @@ ipcRenderer.on('edit', (e,edit)=>{
             identificationT,
             adreessT,
             phonelineT,
+            fechaT,
             notasT
         ];  
         
         pool.getConnection(function(err, connection) {  
             console.log("Connected!");  
-            var sql = 'UPDATE inforegistro SET nombre=?, apellido=?, cedula=?, direccion=?, telefono=?, notas=? WHERE cedula=?'; 
+            var sql = 'UPDATE inforegistro SET nombre=?, apellido=?, cedula=?, direccion=?, telefono=?, fecha=?, notas=? WHERE cedula=?'; 
             console.log(newProduct);
-            connection.query(sql, [nameT,lastnameT,identificationT,adreessT,phonelineT,notasT,edit], function (err, results) { 
+            connection.query(sql, [nameT,lastnameT,identificationT,adreessT,phonelineT,fechaT,notasT,edit], function (err, results) { 
             connection.release(); 
             if (err) throw err;  
             console.log("Agregado: " + results.affectedRows);
-            });   
+            });  
+            ipcRenderer.send('update', newProduct);  
         }); 
-        const remote = require('electron').remote;
+        
         const x=()=>{var window = remote.getCurrentWindow();window.close();};
         setTimeout(function(){x()},600);       
         e.preventDefault();

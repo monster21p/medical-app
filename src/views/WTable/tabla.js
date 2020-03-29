@@ -1,37 +1,52 @@
+
+//módulos importados
 const customTitlebar = require('custom-electron-titlebar');
- 
+const mostrarTabla = require('./mostrarTabla');
+const {ipcRenderer} = require('electron');
+const remote = require('electron').remote;
+const main = remote.require('./index.js');
+const borrar = require('./borrar');    
+const pool = require('../../sqlserver');
+const limpiar1 = require('./limpiar');
+
+//constantes de botones
+const form = document.querySelector('#barraDeBusqueda');
+const mt = document.getElementById('mostrarTodos');
+
+
+
+//titlebar
 let MyTitleBar = new customTitlebar.Titlebar({
     backgroundColor: customTitlebar.Color.fromHex('#21263E'),
     shadow: true,
-    maximizable: false,
+    overflow: "hidden",
     icon: '../../../assets/icons/win/icon.ico'
 });
 
 MyTitleBar.updateTitle('REGISTRO');
 
-const mostrarTabla = require('./mostrarTabla');
 mostrarTabla();
 
-const {ipcRenderer} = require('electron');
 ipcRenderer.on('product:new', (e , newProduct) => {
     console.log('agregado--> ',newProduct);
     var name = newProduct[0];
     console.log('nombre-->',name);
     alertify.set('notifier','position', 'top-left');
     alertify.success('Agregado : ' + name);
+    mostrarTabla();
 });
 
-const limpiar2 = () => {
-    document.getElementById("busquedaI").value = "";
-};
+ipcRenderer.on('update', (e , update) => {
+    console.log('update--> ',update);
+    var name = update[0];
+    console.log('nombre-->',name);
+    alertify.set('notifier','position', 'top-left');
+    alertify.success('Actualizado : ' + name);
+    mostrarTabla();
+});
 
 const mostrarCedula = (mc) =>{
-
-    const remote = require('electron').remote;
-    const main = remote.require('./index.js');
-    const borrar = require('./eliminar');
     
-    const pool = require('../../sqlserver');
     console.log(mc);
     const busqq = [mc];
 
@@ -51,18 +66,16 @@ const mostrarCedula = (mc) =>{
                 tableBody += '  <td>' + results[i].cedula + '</td>';        
                 tableBody += '  <td>' + results[i].direccion + '</td>';
                 tableBody += '  <td>' + results[i].telefono + '</td>';
-                tableBody += '  <td>' + results[i].created_at + '</td>';
-                tableBody += '  <td><input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 10px;"><input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;"></td>';
+                tableBody += '  <td>' + results[i].fecha + '</td>';
+                tableBody += '  <td style="background: light-gray; width:189px"><input id="edit" class="btn btn-warning" type="button" value="Editar" style="margin-left: 1px;"><input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 30px;"></td>';
                 tableBody += '</tr>';
-                //<input id="delete" class="btn btn-danger" type="button" value="Eliminar" style="margin-left: 80px;">
             };
             document.getElementById("tablebody").innerHTML = tableBody;
             var edit = results[0].cedula;
-            const {ipcRenderer} = require('electron');
-            const btn1 = document.getElementById('edit');
             const btn2 = document.getElementById('delete');
+            const btn1 = document.getElementById('edit');
             btn2.addEventListener('click', ()=>{
-                alertify.confirm('Eliminar: '+edit, 'Esta Seguro?', 
+                alertify.confirm('Eliminar: '+edit, '¿ Esta Seguro ?', 
                     function(){borrar(edit),alertify.success('Eliminación  Exitosa') }, 
                     function(){alertify.error('Cancelado')});
             });
@@ -75,20 +88,18 @@ const mostrarCedula = (mc) =>{
         });
 
     });
-    limpiar2();
-    //borrar(mc);
+    limpiar1();
 };
 
-$(document).on('click', '.btn.btn-info', (e) => {
-    mostrarTabla();
+//botones de motrar todo y de busqueda
+mt.addEventListener('click', (e) => {
     e.preventDefault();
+    mostrarTabla();
 });
 
-const form = document.querySelector('#barraDeBusqueda');
-form.addEventListener('submit', e => {
-    const busq = document.querySelector('#busquedaI').value;
-    mostrarCedula(busq);
+form.addEventListener('submit', (e) => {
     e.preventDefault();
+    mostrarCedula(document.querySelector('#busquedaI').value);
 });
 
 

@@ -2,6 +2,9 @@ const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const url = require('url');
 const path = require('path');
 
+const express = require('express');
+const apps = express();
+
 if(process.env.NODE_ENV !== 'production'){
     require('electron-reload')(__dirname, {
         electron: path.join(__dirname, '../node_modules', '.bin', 'electron')
@@ -14,6 +17,11 @@ let WindowEdit;
 
 app.on('ready', () => {
 
+    apps.use(express.static(__dirname + '/views/WTable/'));
+
+    apps.listen('3000', function() {
+        console.log('Servidor web escuchando en el puerto 3000');
+    });
     
     CreateStartWindow();
     setTimeout(function(){CreateWindowTable()},4000);
@@ -32,7 +40,8 @@ const CreateStartWindow = ()=> {
         width: 500,
         height: 150,
         resizable : false,
-        show: false
+        show: false,
+        icon: path.join(__dirname, '../assets/icons/win/icon.ico')
     });
     StartWindow.setMenu(null);
     StartWindow.loadURL(url.format({
@@ -56,11 +65,12 @@ const CreateWindowRegister = ()=> {
         },
         frame: false,
         width: 500,
-        height: 585,
+        height: 630,
         minimizable : true,
         maximizable : true,
         resizable : false,
         show: false,
+        transparent: true,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico')
     });
     WindowRegister.setMenu(null);
@@ -91,10 +101,12 @@ const CreateWindowTable = () => {
         },
         width:1366,
         height:768,
-        resizable : false,
+        maximizable: true,
         show: false,
         icon: path.join(__dirname, '../assets/icons/win/icon.ico'),
-        frame: false
+        frame: false,
+        transparent: true
+        
     });
 
     mainWindow.loadURL(url.format({
@@ -159,6 +171,11 @@ module.exports.CreateWindowEdit = () => {
         mainWindow.webContents.send('product:new', newProduct);
         WindowRegister.webContents.send('product:new', newProduct);
     });
+
+    ipcMain.on('update', (e, update) => {
+        console.log(update);
+        mainWindow.webContents.send('update', update);
+    });
     
 const templateMenu = [
     
@@ -168,9 +185,12 @@ const templateMenu = [
         click(){
             CreateWindowRegister();
         }
+    },
+    {
+        type: 'separator'
     }
 ];
-
+/*
 if(process.env.NODE_ENV !== 'production'){
     templateMenu.push({
         label: 'Devtools',
@@ -186,4 +206,4 @@ if(process.env.NODE_ENV !== 'production'){
     })
 
 };
-
+*/
