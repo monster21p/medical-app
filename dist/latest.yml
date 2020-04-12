@@ -1,8 +1,0 @@
-version: 1.7.1
-files:
-  - url: Register-Setup-1.7.1.exe
-    sha512: PqbaJFF+Mqu2jSHXahvMrx8fq8ReIE0/2iWSERG8nVZ1Z026HZt5gYuoS6084JgFcnMI8NB3DXPUBETHhxqAWw==
-    size: 51424899
-path: Register-Setup-1.7.1.exe
-sha512: PqbaJFF+Mqu2jSHXahvMrx8fq8ReIE0/2iWSERG8nVZ1Z026HZt5gYuoS6084JgFcnMI8NB3DXPUBETHhxqAWw==
-releaseDate: '2020-04-12T21:20:23.777Z'

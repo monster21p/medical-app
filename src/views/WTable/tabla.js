@@ -8,6 +8,10 @@ moment.locale('es-us');
 
 db.showUsers();
 
+ipcRenderer.on('message',(e, text) => {
+    console.log('message from updater: ',text)
+})
+
 ipcRenderer.on('registrar', (e , registrar) => {
     db.showUsers();
     console.table([registrar]);
