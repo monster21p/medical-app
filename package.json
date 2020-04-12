@@ -1,7 +1,7 @@
 {
   "name": "medical-app",
   "productName": "Register",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "repository": "https://github.com/monster21p/medical-app.git",
   "description": "",
   "main": "src/app.js",
