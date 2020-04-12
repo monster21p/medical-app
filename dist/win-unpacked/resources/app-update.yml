@@ -1,0 +1,4 @@
+owner: monster21p
+repo: medical-app
+provider: github
+updaterCacheDirName: medical-app-updater

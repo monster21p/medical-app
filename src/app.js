@@ -13,14 +13,7 @@ let WindowRegister;
 let WindowEdit;
 
 app.allowRendererProcessReuse = false;
-//
-require('update-electron-app')({
-    host: 'https://github.com/monster21p/medical-app.git',
-    repo: 'monster21p/medical-app',
-    updateInterval: '5 minute',
-    logger: require('electron-log')
-  })
-//
+
 app.on('ready', () => {
     CreateWindowTable();
 });
