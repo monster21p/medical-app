@@ -1,0 +1,457 @@
+body{
+    background: transparent;
+    overflow: hidden;
+}
+
+*::-webkit-input-placeholder {
+    color: #4DD0E1; 
+}
+
+table{
+    margin: 10px;
+    font-family: 'baloo da 2';
+    font-style: normal;
+    font-size: large;
+    width: 98%;
+    text-align: left;
+    border-collapse: collapse;
+    background:none;
+    color: #006064;  
+    transition: all 0.3s ease-in-out;
+    
+}
+th, td{
+    border: solid 1px #4DD0E1;
+    padding: 5px;
+}
+thead{
+    background-color: #4DD0E1;
+    color: #006064; 
+    
+}
+tbody{
+    color: black;
+}
+tr:hover td{
+    background: #4DD0E1;
+    color: black;
+    transition: all 0.3s ease-in-out;
+}
+::-webkit-scrollbar {     
+    background-color: transparent;
+    width: .01em
+}
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+#background{
+    position: relative;
+    width: 1164px;
+    height: 690px;
+
+    background: #E0F7FA;
+    mix-blend-mode: normal;
+    border-radius: 15px;
+}
+
+header{
+position: absolute;
+width: 1164px;
+height: 83px;
+left: 0px;
+top: 0px;
+
+border-radius: 0px;
+}
+#object-search{
+position: absolute;
+width: 305px;
+height: 55px;
+left: 27px;
+top: 28px;
+}
+#search1{
+position: absolute;
+width: 30px;
+height: 30px;
+left: 17px;
+top: 12px;
+}
+#search2{
+position: absolute;
+left: 12.5%;
+right: 14.62%;
+top: 12.5%;
+bottom: 14.62%;
+}
+#busqueda{
+outline: none;
+padding-left: 40px;
+border: none;
+position: absolute;
+width: 286px;
+height: 40px;
+left: 10px;
+top: 6px;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 500;
+font-size: 29px;
+line-height: 49px;
+display: flex;
+align-items: center;
+
+color: #4DD0E1;
+}
+#t-users{
+
+position: absolute;
+width: 115px;
+height: 40px;
+left: 1008px;
+top: 34px;
+
+background: #FFFFFF;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+}
+
+#users1{
+
+position: absolute;
+width: 35px;
+height: 35px;
+left: 8px;
+top: 2px;
+}
+
+
+#users2{
+
+position: absolute;
+left: 8.29%;
+right: 8.37%;
+top: 8.33%;
+bottom: 8.33%;
+}
+
+#users{
+
+position: absolute;
+width: 52px;
+height: 29px;
+left: 51px;
+top: 2px;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 600;
+font-size: 23px;
+line-height: 39px;
+
+color: #4DD0E1;
+}
+article{
+position: absolute;
+width: 1074px;
+height: 435px;
+left: 44px;
+top: 126px;
+
+background: #FAFAFA;
+box-shadow: 0px 3px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+}
+#object-t-table{
+
+position: absolute;
+width: 216px;
+height: 40px;
+left: 18px;
+top: 15px;
+
+background: #FFFFFF;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+}
+
+#registro-médico{
+
+position: absolute;
+width: 162px;
+height: 30px;
+left: 43px;
+top: 1px;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 600;
+font-size: 23px;
+line-height: 39px;
+
+color: #4DD0E1;
+}
+
+
+#rg1{
+
+position: absolute;
+width: 30px;
+height: 30px;
+left: 10px;
+top: 5px;
+}
+
+
+#rg2{
+
+position: absolute;
+left: 12.5%;
+right: 12.5%;
+top: 4.17%;
+bottom: 12.5%;
+}
+#add{
+z-index: 2;
+position: absolute;
+width: 150px;
+height: 40px;
+left: 906px;
+top: 377px;
+
+background: #FFFFFF;
+box-shadow: 0px 2px 4px #FF6F00;
+border-radius: 15px;
+}
+
+#add1{
+
+position: absolute;
+width: 30px;
+height: 30px;
+left: 10px;
+top: 5px;
+
+border-radius: 50px;
+}
+
+#add2{
+
+position: absolute;
+left: 16%;
+right: 16%;
+top: 22%;
+bottom: 22%;
+}
+
+
+#añadir:before{
+content: 'añadir';
+position: absolute;
+width: 89px;
+height: 30px;
+left: 49px;
+top: 7px;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 600;
+font-size: 29px;
+line-height: 52px;
+display: flex;
+align-items: center;
+
+color: #FF6F00;
+}
+
+#f-add{
+
+position: absolute;
+width: 150px;
+height: 40px;
+left: 0px;
+top: 0px;
+
+background: rgba(255, 111, 0, 0.37);
+border-radius: 15px;
+}
+#refresh1{
+
+position: absolute;
+width: 40px;
+height: 40px;
+left: 1016px;
+top: 17px;
+
+background: rgba(31, 170, 0, 0.31);
+border-radius: 50px;
+}
+
+#refresh2{
+
+position: absolute;
+left: 16.67%;
+right: 16.67%;
+top: 4.17%;
+bottom: 4.17%;
+}
+#table-card{
+overflow-y: auto;
+position: absolute;
+width: 1016px;
+height: 330px;
+left: 28px;
+top: 75px;
+
+border-radius: 15px;
+}
+
+footer{
+
+position: absolute;
+width: 1164px;
+height: 87px;
+left: 0px;
+top: 603px;
+}
+#object-title{
+
+position: absolute;
+width: 208px;
+height: 64px;
+left: 27px;
+top: 12px;
+}
+
+
+#title:before{
+content: 'REGISTER';
+position: absolute;
+width: 136px;
+height: 32px;
+left: 61px;
+top: 19px;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 600;
+font-size: 31px;
+line-height: 52px;
+display: flex;
+align-items: center;
+
+color: #00ACC1;
+
+}
+
+#hospital-icon{
+
+position: absolute;
+width: 40px;
+height: 40px;
+left: 12px;
+top: 11px;
+
+background: url('./icons/hospital-icon.png');
+}
+#exit{
+
+position: absolute;
+width: 121px;
+height: 40px;
+left: 979px;
+top: 23px;
+
+background: #FFFFFF;
+box-shadow: 0px 2px 4px #D50000;
+border-radius: 15px;
+}
+
+#exit1{
+
+position: absolute;
+width: 40px;
+height: 40px;
+left: 7px;
+top: 0px;
+
+border-radius: 50px;
+}
+
+#exit2{
+
+position: absolute;
+left: 20%;
+right: 20%;
+top: 20%;
+bottom: 20%;
+}
+
+#salir:before{
+content: 'salir';
+position: absolute;
+width: 61px;
+height: 24px;
+left: 47px;
+top: 10px;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 600;
+font-size: 29px;
+line-height: 52px;
+display: flex;
+align-items: center;
+
+color: #D50000;
+}
+
+
+#f-exit{
+
+position: absolute;
+width: 121px;
+height: 40px;
+left: 0px;
+top: 0px;
+
+background: rgba(213, 0, 0, 0.32);
+border-radius: 15px;
+}
+
+/*alertifyjs*/
+.alertify-notifier .ajs-message.ajs-error{
+    color: white;
+    background: rgba(255,0,0,0.8);
+    border-radius: 20px;
+    font-size: x-large;
+}
+.alertify-notifier .ajs-message.ajs-success{
+    color: white;
+    background: rgba(0,255,0,0.8);
+    border-radius: 20px;
+    font-size: x-large;
+}
+.alertify .ajs-header{
+    color: black;
+    font-size: x-large;
+}
+.alertify .ajs-body{
+    padding-left: 80px;
+    color: black;
+    font-size: x-large;
+}
+.alertify .ajs-dialog{
+    width: 425px;
+    height: 150px;
+}
+.alertify .ajs-footer{
+    padding-right: 117px;
+}

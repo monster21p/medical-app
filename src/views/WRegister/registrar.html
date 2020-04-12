@@ -4,81 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <link rel="stylesheet" href="./registrar.css">
     <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="../../bootstrap.min.css">
 </head>
 <body>
-    <div class="container-fluid p-3 mb-2 text-grey">
-        <div class="card">
-            <div class="card-header shadow p-3 mb-3 text-center">
-                <h4 class="card-title">Registrando</h4>
-            </div>
-        <div class="card-body">
-            <form class="p-4" id="form">
-                <div class="form-group">
-                    <input 
-                        type="text" 
-                        id="name" 
-                        class="form-control" 
-                        placeholder="Nombre" 
-                        autofocus
-                        required 
-                        oninvalid="setCustomValidity('El campo es obligatorio')"
-                        oninput="setCustomValidity('')"
-                    >
-                </div>
-                <div class="form-group">
-                    <input 
-                        type="text" 
-                        id="lastname" 
-                        class="form-control" 
-                        placeholder="Apellido" 
-                        required 
-                        oninvalid="setCustomValidity('El campo es obligatorio')"
-                        oninput="setCustomValidity('')"
-                    >
-                </div>
-                <div class="form-group">
-                    <input 
-                        type="text" 
-                        id="identificationcard" 
-                        class="form-control" 
-                        placeholder="Cédula" 
-                        required 
-                        oninvalid="setCustomValidity('El campo es obligatorio')"
-                        oninput="setCustomValidity('')"
-                    >
-                </div>
-                <div class="form-group">
-                    <input 
-                        type="text" 
-                        id="adreess" 
-                        class="form-control" 
-                        placeholder="Dirección" 
-                        required 
-                        oninvalid="setCustomValidity('El campo es obligatorio')"
-                        oninput="setCustomValidity('')"
-                    >
-                </div>
-                <div class="form-group">
-                    <input 
-                        type="text" 
-                        id="phoneline" 
-                        class="form-control" 
-                        placeholder="Teléfono" 
-                        required 
-                        oninvalid="setCustomValidity('El campo es obligatorio')"
-                        oninput="setCustomValidity('')"
-                    >
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary btn-block">GUARDAR</button>
-                </div>
-            </form>
-        </div>
+    <div id="f-r">
+        <form id="form">
+            <input 
+                    type="text" 
+                    id="name"  
+                    placeholder="Nombre" 
+                    autofocus
+                    required 
+                    oninvalid="setCustomValidity('El campo es obligatorio')"
+                    oninput="setCustomValidity('')"
+            >
+            <input 
+                    type="text" 
+                    id="lastName" 
+                    placeholder="Apellido" 
+                    required 
+                    oninvalid="setCustomValidity('El campo es obligatorio')"
+                    oninput="setCustomValidity('')"
+            >
+            <input 
+                    type="text" 
+                    id="identificationCard" 
+                    placeholder="Cédula" 
+                    required 
+                    oninvalid="setCustomValidity('El campo es obligatorio')"
+                    oninput="setCustomValidity('')"
+            >
+            <input 
+                    type="text" 
+                    id="address" 
+                    placeholder="Dirección" 
+                    required 
+                    oninvalid="setCustomValidity('El campo es obligatorio')"
+                    oninput="setCustomValidity('')"
+            >
+            <input 
+                    type="text" 
+                    id="phone" 
+                    placeholder="Teléfono" 
+                    required 
+                    oninvalid="setCustomValidity('El campo es obligatorio')"
+                    oninput="setCustomValidity('')"
+            >
+            <button id="save">
+                <div id="f-save"></div>
+                <span id="guardar"></span>
+            </button>
+        </form>
     </div>
-    <link rel="stylesheet" href="../../style.css">
-    <script>var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');</script>
     <script src="./registrar.js"></script>
+    <script>var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');</script>
 </body>
 </html>

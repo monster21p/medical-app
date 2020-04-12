@@ -1,53 +1,27 @@
-const customTitlebar = require('custom-electron-titlebar');
- 
-let MyTitleBar = new customTitlebar.Titlebar({
-    backgroundColor: customTitlebar.Color.fromHex('#21263E'),
-    overflow: "hidden",
-    shadow: true,
-    maximizable: false,
-    icon: '../../../assets/icons/win/icon.ico'
-});
+const remote = require('electron').remote;
+const db = require('../../indexedb');
+const moment = require('moment');
 
-MyTitleBar.updateTitle('');
-
-function limpiar1() {
-    document.getElementById("name").value = "";
-    document.getElementById("lastname").value = "";
-    document.getElementById("identificationcard").value = "";
-    document.getElementById("adreess").value = "";
-    document.getElementById("phoneline").value = "";
-};
-
-//const {ipcRenderer} = require('electron');
 const form = document.querySelector('#form');
 
     form.addEventListener('submit', e => {
-        const nameT = document.querySelector('#name').value;
-        const lastnameT = document.querySelector('#lastname').value;
-        const identificationT = document.querySelector('#identificationcard').value;
-        const adreessT = document.querySelector('#adreess').value;
-        const phonelineT = document.querySelector('#phoneline').value;
-        var moment = require('moment');
-        moment.locale('es-us');
-        const fechaT = moment().format('LLLL')
-
-        const newProduct = [
-            nameT,
-            lastnameT,
-            identificationT,
-            adreessT,
-            phonelineT,
-            fechaT 
-        ];  
-        
-
-        const registrar = require('./registrarDB');
-        registrar(newProduct);      
         e.preventDefault();
-        limpiar1();
-        const remote = require('electron').remote;
-        const r=()=>{var window = remote.getCurrentWindow();window.close();};
-        setTimeout(function(){r()},500);
+        
+        moment.locale('es-us');
+        const f = moment().format('LLLL');
+        const data = {
+            cédula:document.getElementById('identificationCard').value,
+            nombre:document.getElementById('name').value,
+            apellido:document.getElementById('lastName').value,
+            dirección:document.getElementById('address').value,
+            teléfono:document.getElementById('phone').value,
+            fecha: f
+        };
+        db.addUser(data);
+        form.reset();
+        x=()=>remote.getCurrentWindow().close();
+        setTimeout(function(){x()},600);
     });
+
 
         

@@ -1,60 +1,82 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>
-        <link rel="stylesheet" href="../../bootstrap.min.css">
-        <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" href="../../../node_modules/alertifyjs/build/css/alertify.min.css">
-        <link rel="stylesheet" href="../../../node_modules/alertifyjs/build/css/themes/bootstrap.min.css">
-        <script src="../../../node_modules/alertifyjs/build/alertify.min.js"></script>
-    </head>
-
-    <body>
-        <div class="container-fluid p-3 mb-2 text-white">
-        <div class="card-header card-title text-center shadow p-3 mb-3 bg-grey rounded">
-            <h4 class="m-0">Registro de Pacientes</h4>
-        </div>
-        <form id="barraDeBusqueda">
-            <div class="form-group ml-0 mb-2 row">
-                <input 
-                    id="busquedaI" 
-                    type="text" 
-                    class="form-control col-md-3 p-3 bg-white rounded" 
-                    placeholder="  Búsqueda por Cédula" 
-                    autofocus
-                    required
-                    oninvalid="setCustomValidity('Introduzca el n° de cédula')"
-                    oninput="setCustomValidity('')"
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../node_modules/animate.css/animate.min.css">
+    <link rel="stylesheet" href="tabla.css">
+    <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="../../../node_modules/alertifyjs/build/css/alertify.min.css">
+    <link rel="stylesheet" href="../../../node_modules/alertifyjs/build/css/themes/bootstrap.min.css">
+    <script src="../../../node_modules/alertifyjs/build/alertify.min.js"></script>
+    <title></title>
+</head>
+<body>
+    <div id="background">
+        <header>
+        <div id="object-search">
+            <form id="form">
+                <input  
+                id="busqueda" 
+                type="text" 
+                maxlength="10"
+                placeholder="cédula" 
+                required
+                oninvalid="setCustomValidity('Introduzca el n° de cédula')"
+                oninput="setCustomValidity('')"
+                autofocus
                 >
-                <button class="btn btn-success ml-3">Buscar</button>
-                <input id="mostrarTodos" type="button" class="btn btn-info" value="mostrar todos" style="margin-left: 30px;">
-                <div id="countt" style="margin-left: 30px;"></div>
+            </form>
+            <div id="search1"><img src="./icons/search2.png" id="search2"></div>
+        </div>
+        <div id="t-users">
+            <div id="users1"><img src="./icons/users2.png" id="users2"></div>
+            <span id="users"></span>
+        </div>
+        </header>
+        <article>
+        <div id="object-t-table">
+            <div id="rg1"><img src="./icons/rg2.png" id="rg2"></div>
+            <span id="registro-médico">registro médico</span>
+        </div>
+        <a id="refresh1" href="javascript:;" onclick="refresh()"><img src="./icons/refresh2.png" id="refresh2"></a>
+        <a id="add" href="javascript:;" onclick="add()">
+            <div id="f-add">
+                <div id="add1"><img src="./icons/add2.png" id="add2"></div>
+                <span id="añadir"></span>
             </div>
-        </form>
-        <div id="tabla" class="card-body shadow p-3 mb-3 bg-grey rounded form">
-            <table class="table table-bordered table-sm form-group">
+        </a>
+        <div id="table-card">
+            <table>
                 <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Cédula</th>
-                    <th>Dirección</th>
-                    <th>Teléfono</th>
-                    <th>Fecha</th>
-                  </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cédula</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Fecha</th>
+                        <th></th>
+                    </tr>
                 </thead>
-                <tbody id="tablebody" class="table-primary" style="background-color: lightgray;color: black">
-                </tbody>
+                <tbody id="tablebody"></tbody>
               </table>
         </div>
-        </div>
-        <link rel="stylesheet" href="../../style.css">
-        <script>var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');</script>
-        <script src="./tabla.js"></script>
-    </body>
-    
+        </article>
+        <footer>
+            <div id="object-title">
+                <div id="hospital-icon"></div>
+                <span id="title"></span>
+            </div>
+            <a id="exit" href="javascript:;" onclick="exit()">
+                <div id="f-exit">
+                    <div id="exit1"><img src="./icons/exit2.png" id="exit2"></div>
+                    <span id="salir"></span>
+                </div>
+            </a>
+        </footer>
+    </div>
+    <script src="tabla.js"></script>
+    <script>var $ = jQuery = require('../../../node_modules/jquery/dist/jquery.min.js');</script>
+</body>
 </html>

@@ -1,0 +1,201 @@
+body{
+    background: transparent;
+    overflow: hidden;
+};
+*::-webkit-input-placeholder {
+    color: #4DD0E1; 
+}
+
+form{
+position: absolute;
+width: 350px;
+height: 400px;
+left: 0px;
+top: 0px;
+
+background: #E0F7FA;
+border-radius: 15px;
+box-shadow: 4px 4px 10px rgba(77, 208, 225, 0.78);
+}
+
+#phone{
+
+position: absolute;
+width: 286px;
+height: 40px;
+left: 21px;
+top: 231px;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+
+outline: none;
+padding-left: 20px;
+border: none;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 500;
+font-size: 26px;
+line-height: 49px;
+display: flex;
+align-items: center;
+
+color: #4DD0E1;
+}
+
+#address{
+
+position: absolute;
+width: 286px;
+height: 40px;
+left: 21px;
+top: 177px;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+
+outline: none;
+padding-left: 20px;
+border: none;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 500;
+font-size: 26px;
+line-height: 49px;
+display: flex;
+align-items: center;
+
+color: #4DD0E1;
+}
+
+#identificationCard{
+
+position: absolute;
+width: 286px;
+height: 40px;
+left: 21px;
+top: 123px;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+
+outline: none;
+padding-left: 20px;
+border: none;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 500;
+font-size: 26px;
+line-height: 49px;
+display: flex;
+align-items: center;
+
+color: #4DD0E1;
+}
+
+#lastName{
+
+position: absolute;
+width: 286px;
+height: 40px;
+left: 21px;
+top: 69px;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+
+outline: none;
+padding-left: 20px;
+border: none;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 500;
+font-size: 26px;
+line-height: 49px;
+display: flex;
+align-items: center;
+
+color: #4DD0E1;
+}
+
+#name{
+
+position: absolute;
+width: 286px;
+height: 40px;
+left: 21px;
+top: 15px;
+
+background: #FFFFFF;
+mix-blend-mode: normal;
+box-shadow: 0px 2px 4px rgba(77, 208, 225, 0.6);
+border-radius: 15px;
+
+outline: none;
+padding-left: 20px;
+border: none;
+
+font-family: 'Baloo Da 2';
+font-style: normal;
+font-weight: 500;
+font-size: 26px;
+line-height: 49px;
+display: flex;
+align-items: center;
+
+color: #4DD0E1;
+}
+
+#save{
+outline: none;
+border: none;
+position: absolute;
+width: 150px;
+height: 40px;
+left: 96px;
+top: 304px;
+
+background: #FFFFFF;
+box-shadow: 0px 2px 4px #FF6F00;
+border-radius: 15px;
+}
+#guardar:before{
+    content: 'Guardar';
+    position: absolute;
+    width: 110px;
+    height: 30px;
+    left: 22px;
+    top: 5px;
+    font-family: 'Baloo Da 2';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 29px;
+    line-height: 49px;
+    display: flex;
+    align-items: center;
+    
+    color: #FF6F00;
+}
+#f-save{
+
+position: absolute;
+width: 150px;
+height: 40px;
+left: 0px;
+top: 0px;
+
+background: rgba(255, 111, 0, 0.37);
+border-radius: 15px;
+}
